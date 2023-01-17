@@ -1,31 +1,19 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Fri Sep 30 17:06:21 2022
 
-@author: JY
-"""
+'''
+This is an example code for substracting rainstreak layer images and background layer images from raw video. 
 
+If you use this code, please cite it as below.
+
+Lee, J., Byun, J., Baik, J., Jun, C., and Kim, H.-J.(2022) Estimation of raindrop size distribution and rain rate with infrared surveillance camera in dark conditions, Atmos. Meas. Tech. Discuss. [preprint], https://doi.org/10.5194/amt-2022-196, in review.
+
+'''
 #%% 00. Library
 import cv2
-
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 import os
 from glob import glob
 from tqdm import tqdm
-from datetime import datetime, timedelta
-import collections
-from collections import Counter
-from random import sample 
-from matplotlib import cm
-from matplotlib.colors import ListedColormap, LinearSegmentedColormap
-
-import matplotlib
-import matplotlib.font_manager as fm
-from cv2 import cvtColor
-import time
-
 def digit_three(num):
     return '%03d' %num
 
@@ -51,14 +39,13 @@ def imgshow_array(window_name, array):
     cv2.waitKey(1)
     
 #%% 01. Path Setting
-# current_path = r"D:\01.code\23.CCTV_DSD_논문작업\#20230116_배경분리코드"
-current_path = r"F:\#20230116_배경분리코드"
+current_path = os.getcwd()
 os.chdir(current_path)
 vid_list = [x for x in glob('./*.mp4')]
 
 #%% 02. Video Info & Setting
 vid = cv2.VideoCapture(vid_list[0])
-length = vid.get(cv2.CAP_PROP_FRAME_COUNT)
+length = int(vid.get(cv2.CAP_PROP_FRAME_COUNT))
 width = int(vid.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(vid.get(cv2.CAP_PROP_FRAME_HEIGHT))
 fps = round(vid.get(cv2.CAP_PROP_FPS))
@@ -67,8 +54,8 @@ fourcc = cv2.VideoWriter_fourcc(*'DIVX')
 total_time = int(length/fps)
 select_frame = np.arange(0,length).astype(int)
 image_save_type = '.png'
-#%% 03. ROI Setting
 
+#%% 03. ROI Setting
 roi_start_point_x = 600
 roi_start_point_y = 200
 roi_size = 640
@@ -82,14 +69,10 @@ vid = cv2.VideoCapture(vid_list[0])
 return_value, frame = vid.read()
 
 cv2.rectangle(frame, pt1, pt2, red, 5)
-
-# cv2.rectangle(frame, (1050,150),(1050+640,150+640), red, 5)
-            # crop_img = rain_streak[200:200+640,600:600+640] # CAM1
-            # crop_img = rain_streak[150:150+640,250:250+640] # CAM5
-cv2.imshow('ROI_CHECK',frame)
-# cv2.imwrite('d:/sample.png', img)
-cv2.waitKey(2000) # Wait for 2000ms(=2s) for ROI_CHECK window / Put '0' to maintain the ROI_CHECK window.
+cv2.imshow('ROI_CHECK', frame)
+cv2.waitKey(1000) # Wait for 2000ms(=2s) for ROI_CHECK window / Put '0' to maintain the ROI_CHECK window.
 cv2.destroyAllWindows()
+
 #%% 04. Backgroud Subtraction_total
 
 fgbg = cv2.createBackgroundSubtractorKNN(detectShadows=False)
@@ -99,13 +82,10 @@ binary_threshold_lower_limit = 20
 binary_threshold_upper_limit = 255
 binary_type = cv2.THRESH_BINARY
 
-
-while True:
-    start = time.time()
-    
-    # (0) Read Frame
+count_value = 0
+for idx in tqdm(range(length)):
     return_value, frame = vid.read()
-     
+    
     if return_value:
         frame = frame[200:200+640,600:600+640]
         
@@ -124,20 +104,9 @@ while True:
         rain_streak = np.stack((rain_streak,)*3, axis=-1)
         binary_rain_streak = np.stack((binary_rain_streak,)*3, axis=-1)
         
-        
         # (4) Visualization
         visualization_img = rain_streak
-        cv2.imshow('background extraction video', visualization_img) # PRESS 'SPACE' to progress rain streak visualizaion & 
-        cv2.waitKey()
-        
-    else : 
-        print('#### Video is finished #### OR #### There is an error in frame ####')
-        break
-    
-    k = cv2.waitKey(0)
-    if k == ord('s') or k == 27: # PRESS 's' key or 'ESC' to stop
-        break
+                
+        # (5) Save
+        cv2.imwrite(r'./#rain_streak/REF_'+digit_four(idx)+'.png', rain_streak) 
 
-cv2.destroyAllWindows()
-
-#%%

@@ -11,7 +11,7 @@ PRO Lv2_Analysis_ND_CCTV_PARSIVEL
   ;;;======== Directory =====================================================
   Main_Dir = 'F:\In_CAU\For_CCTV_QPE\Program\For_CCTV\For_GitHub\'
   Lv2_Dir = Main_Dir+'Data\Lv2_ND\'
-  Pic_Dir = Main_Dir+'Picture\'
+  Pic_Dir = Main_Dir+'Figure\'
 
   file_mkdir, Lv2_Dir, /NOEXPAND_PATH
   file_mkdir, Pic_Dir, /NOEXPAND_PATH
@@ -34,8 +34,8 @@ PRO Lv2_Analysis_ND_CCTV_PARSIVEL
   d2_cctv=dia_cctv^2 & d3_cctv=dia_cctv^3 & d4_cctv=dia_cctv^4 & d5_cctv=dia_cctv^5 & d6_cctv=dia_cctv^6
 
   ;;;======================================
-  Lv2_parsi = Lv2_Dir+'ND_PARSIVEL.mis'
-  Lv2_cctv = Lv2_Dir+'ND_CCTV.mis'
+  Lv2_parsi = Lv2_Dir+'ND_PARSIVEL_paper.mis'
+  Lv2_cctv = Lv2_Dir+'ND_CCTV_paper.mis'
   ;;;======================================
 
   nlines_p = file_lines(Lv2_parsi)
@@ -265,7 +265,7 @@ PRO Lv2_Analysis_ND_CCTV_PARSIVEL
 
   ;;;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   ;;;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-  ;;;@@@@@  Drawing Picture  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  ;;;@@@@@  Drawing Figures  @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   ;;;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   ;;;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 

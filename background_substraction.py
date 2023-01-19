@@ -41,7 +41,7 @@ def imgshow_array(window_name, array):
 #%% 01. Path Setting
 current_path = os.getcwd()
 os.chdir(current_path)
-vid_list = [x for x in glob('./*.mp4')]
+vid_list = [x for x in glob('data/*.mp4')]
 
 #%% 02. Video Info & Setting
 vid = cv2.VideoCapture(vid_list[0])
@@ -83,30 +83,35 @@ binary_threshold_upper_limit = 255
 binary_type = cv2.THRESH_BINARY
 
 count_value = 0
-for idx in tqdm(range(length)):
-    return_value, frame = vid.read()
-    
-    if return_value:
-        frame = frame[200:200+640,600:600+640]
-        
-        # (1) Foreground Setting by KNN subtractor
-        foreground = fgbg.apply(frame)
-        foreground = cv2.dilate(foreground,kernel,iterations=1)
-        opening = cv2.morphologyEx(foreground, cv2.MORPH_OPEN, kernel2)
-        foreground = np.stack((opening,)*3, axis=-1)
-        
-        # (2) Background Setting from Foreground
-        background = fgbg.getBackgroundImage() # 배경
-        
-        # (3) RainStreak_Extraction = Frame - Background 
-        rain_streak = cv2.subtract(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.cvtColor(background, cv2.COLOR_BGR2GRAY))
-        _, binary_rain_streak = cv2.threshold(rain_streak, binary_threshold_lower_limit, binary_threshold_upper_limit, binary_type)
-        rain_streak = np.stack((rain_streak,)*3, axis=-1)
-        binary_rain_streak = np.stack((binary_rain_streak,)*3, axis=-1)
-        
-        # (4) Visualization
-        visualization_img = rain_streak
-                
-        # (5) Save
-        cv2.imwrite(r'./#rain_streak/REF_'+digit_four(idx)+'.png', rain_streak) 
 
+for idx in tqdm(range(length)):
+
+    if idx%30 == 1: # for simplicity, save 1 fps 
+        return_value, frame = vid.read()
+        
+        if return_value:
+            frame = frame[200:200+640,600:600+640]
+            
+            # (1) Foreground Setting by KNN subtractor
+            foreground = fgbg.apply(frame)
+            foreground = cv2.dilate(foreground,kernel,iterations=1)
+            opening = cv2.morphologyEx(foreground, cv2.MORPH_OPEN, kernel2)
+            foreground = np.stack((opening,)*3, axis=-1)
+            
+            # (2) Background Setting from Foreground
+            background = fgbg.getBackgroundImage() # 배경
+            
+            # (3) RainStreak_Extraction = Frame - Background 
+            rain_streak = cv2.subtract(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), cv2.cvtColor(background, cv2.COLOR_BGR2GRAY))
+            _, binary_rain_streak = cv2.threshold(rain_streak, binary_threshold_lower_limit, binary_threshold_upper_limit, binary_type)
+            
+            # (4) Visualization
+            visualization_img = rain_streak
+                
+            # (5) Save (1 fps)
+            np.save(r'data/rain_streak/REF_'+digit_four(idx//30)+'.npy', rain_streak)
+            cv2.imwrite(r'result/rain_streak/REF_'+digit_four(idx//30)+'.png', rain_streak) 
+     #%%
+     
+
+# %%

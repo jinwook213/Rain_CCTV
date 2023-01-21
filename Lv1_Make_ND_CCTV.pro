@@ -8,7 +8,7 @@ PRO Lv1_Make_ND_CCTV
   ;;;################################################################
 
   ;;;======== Directory =====================================================
-  Main_Dir = 'F:\In_CAU\For_CCTV_QPE\Program\For_CCTV\For_GitHub\'
+  Main_Dir = 'D:\Dropbox\Github\Rain_CCTV\'
   PARSIVEL_Dir = Main_Dir+'Data\PARSIVEL\'
   CCTV_Each_Drop_Dir = Main_Dir+'Data\Lv1_Drops\'
   Lv2_Dir = Main_Dir+'Data\Lv2_ND\'

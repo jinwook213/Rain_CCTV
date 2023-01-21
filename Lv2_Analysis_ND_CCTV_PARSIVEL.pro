@@ -9,7 +9,7 @@ PRO Lv2_Analysis_ND_CCTV_PARSIVEL
 
 
   ;;;======== Directory =====================================================
-  Main_Dir = 'F:\In_CAU\For_CCTV_QPE\Program\For_CCTV\For_GitHub\'
+  Main_Dir = 'D:\Dropbox\Github\Rain_CCTV\'
   Lv2_Dir = Main_Dir+'Data\Lv2_ND\'
   Pic_Dir = Main_Dir+'Figure\'
 
@@ -26,7 +26,6 @@ PRO Lv2_Analysis_ND_CCTV_PARSIVEL
 
   d2=dia^2 & d3=dia^3 & d4=dia^4 & d5=dia^5 & d6=dia^6
   terminal_vel=9.65-10.3*exp(-0.6*dia)
-
 
   inter_cctv = 0.1
   dia_cctv = (indgen(80)*inter_cctv) + (inter_cctv/2.)

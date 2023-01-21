@@ -11,7 +11,7 @@ PRO Lv0_Reading_CAM5_CCTV
 
 
   ;;;======== Directory =====================================================
-  Main_Dir = 'F:\In_CAU\For_CCTV_QPE\Program\For_CCTV\For_GitHub2\'
+  Main_Dir = 'D:\Dropbox\Github\Rain_CCTV\'
 
   CCTV_Dir = Main_Dir+'Data\Lv0_rain_streak\'
   ND_Dir = Main_Dir+'Data\Lv1_Drops\'
@@ -300,12 +300,6 @@ stop
 
 
   ENDFOR  ;;; FOR f = 0, ct_files-1L DO BEGIN
-
-
-
-
-
-
 
   print, '===================='
   print, '=== End Program ==='

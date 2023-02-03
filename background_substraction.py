@@ -5,8 +5,8 @@ This is an example code for substracting rainstreak layer images and background 
 
 If you use this code, please cite it as below.
 
-Lee, J., Byun, J., Baik, J., Jun, C., and Kim, H.-J.(2022) Estimation of raindrop size distribution and rain rate with infrared surveillance camera in dark conditions, Atmos. Meas. Tech. Discuss. [preprint], https://doi.org/10.5194/amt-2022-196, in review.
-
+Lee, J., Byun, J., Baik, J., Jun, C., and Kim, H.-J.(2023). Estimation of raindrop size distribution and rain rate with infrared surveillance camera in dark conditions, Atmos. Meas. Tech. 
+  
 '''
 #%% 00. Library
 import cv2

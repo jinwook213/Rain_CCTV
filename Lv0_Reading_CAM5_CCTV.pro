@@ -7,7 +7,7 @@ PRO Lv0_Reading_CAM5_CCTV
   ;;;                                        By Hyeon-Joon Kim (2023.01.12)
   ;;;
   ;;; If you use this code, please cite it as below.
-  ;;; Lee, J., Byun, J., Baik, J., Jun, C., and Kim, H.-J.(2023) Estimation of raindrop size distribution and rain rate with infrared surveillance camera in dark conditions, Atmos. Meas. Tech. 
+  ;;; Lee, J., Byun, J., Baik, J., Jun, C., and Kim, H.-J.(2023). Estimation of raindrop size distribution and rain rate with infrared surveillance camera in dark conditions, Atmos. Meas. Tech. 
   ;;;
   ;;;#########################################################################
 
